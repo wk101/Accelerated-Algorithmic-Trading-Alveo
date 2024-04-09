@@ -3,12 +3,12 @@ import os
 import sys
 import subprocess
 import csv
-import xml.etree.ElementTree as ET
 import json
 import time
 import re
 import argparse
 from argparse import ArgumentParser
+import defusedxml.ElementTree
 
 ##########################################################
 # Configuration
@@ -247,7 +247,7 @@ def hls_xml2dic(xml_rpt):
         xml_string = f.read()
 
     # print("Read xml reports")
-    dict_rpt = make_dict_from_tree(ET.fromstring(xml_string))
+    dict_rpt = make_dict_from_tree(defusedxml.ElementTree.fromstring(xml_string))
 
     return dict_rpt
 
