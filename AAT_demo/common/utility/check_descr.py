@@ -44,7 +44,7 @@ for dirpath, dirnames, filenames in os.walk("../.././"):
 						
                                                         c_f.close()
 
-                                        if (check_flag is 0):
+                                        if (check_flag == 0):
                                                 string_check = string_check + txt
                                                 t = 1
 
