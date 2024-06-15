@@ -6,6 +6,7 @@ from os import listdir
 from sys import argv
 from collections import OrderedDict
 from itertools import islice
+from security import safe_command
 
 XSA = 'xilinx_u200_qdma'
 VERSION = 'Vitis 2019.2'
@@ -115,7 +116,7 @@ def hierarchy(target):
     target.write("in this example is shown below\n\n")
     target.write("::\n\n")
     tree_cmd = ["git ls-files | grep -e data -e src"]
-    proc = subprocess.Popen(tree_cmd,stdout=subprocess.PIPE, shell=True)
+    proc = safe_command.run(subprocess.Popen, tree_cmd,stdout=subprocess.PIPE, shell=True)
     output = proc.communicate()[0]
     output = str(output).split("\'")[1]
     output = output.split("\\n")

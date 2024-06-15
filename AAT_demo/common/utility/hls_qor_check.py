@@ -9,6 +9,7 @@ import time
 import re
 import argparse
 from argparse import ArgumentParser
+from security import safe_command
 
 ##########################################################
 # Configuration
@@ -158,7 +159,7 @@ def str_to_bool(s):
 
 
 def run_cmd(work_dir, cmd, timeout_sec=0):
-    df = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=work_dir)
+    df = safe_command.run(subprocess.Popen, cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=work_dir)
     stdout_bytes, stderr_bytes = df.communicate()
     output = stdout_bytes.decode('utf-8')
     error = stderr_bytes.decode('utf-8')
